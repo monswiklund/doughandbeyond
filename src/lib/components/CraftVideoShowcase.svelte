@@ -120,7 +120,7 @@
 
 	.featured .video-frame {
 		width: min(100vw, 1600px);
-		aspect-ratio: 2.1 / 1;
+		aspect-ratio: 16 / 10;
 		margin-left: 50%;
 		transform: translateX(-50%);
 		border-radius: 0;
@@ -128,7 +128,7 @@
 
 	.staggered .video-frame {
 		width: min(100vw, 1600px);
-		aspect-ratio: 2.1 / 1;
+		aspect-ratio: 16 / 10;
 		margin-left: 50%;
 		transform: translateX(-50%);
 		border-radius: 0;
@@ -250,14 +250,14 @@
 
 		.featured .video-frame {
 			width: calc(100% + (var(--page-gutter) * 2));
-			aspect-ratio: 16 / 10;
+			aspect-ratio: 4 / 5;
 			margin-left: calc(var(--page-gutter) * -1);
 			transform: none;
 		}
 
 		.staggered .video-frame {
 			width: calc(100% + (var(--page-gutter) * 2));
-			aspect-ratio: 16 / 10;
+			aspect-ratio: 4 / 5;
 			margin-left: calc(var(--page-gutter) * -1);
 			transform: none;
 		}
