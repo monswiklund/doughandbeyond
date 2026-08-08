@@ -3,18 +3,18 @@
 <!-- impeccable:design-schema 1 -->
 
 ## Design Intent
-En modern, varm och exklusiv visualisering för **Dough & Beyond** i Lidköping som kombinerar genuint hantverk (72-timmars surdeg) med en showig digital upplevelse.
+En modern, varm och exklusiv visualisering för **Dough & Beyond** i Lidköping som kombinerar genuint hantverk (72-timmars långjäsning) med en showig digital upplevelse.
 
 ## Color Palette
 - **Background Dark**: `#12100E` (Varm grafit / stenugnsmörker)
 - **Surface Card**: `#1C1917` (Mörkt trä / grafit)
 - **Terracotta Accent**: `#C84B31` (Ugnsröd / tegel)
-- **Crust Amber**: `#E08E45` (Gyllene surdegsskorpa)
+- **Crust Amber**: `#E08E45` (Gyllene skorpa)
 - **Basil Green**: `#4E8046` (Färsk basilika)
 - **Dough Ivory**: `#F9F4EB` (Ljus degtextur)
 
 ## Typography
-- **Heading**: Playfair Display (Serif med karaktär och elegans)
+- **Heading**: DM Serif Display (Italiensk editorial-serif med tydliga, läsbara former)
 - **Display & Brand**: Outfit (Modern geometrisk sans-serif)
 - **Body & Controls**: Plus Jakarta Sans (Hög läsbarhet & ren känsla)
 

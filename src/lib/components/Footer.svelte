@@ -1,11 +1,15 @@
+<script lang="ts">
+	import { base } from '$app/paths';
+</script>
+
 <footer class="site-footer">
 	<div class="container footer-content">
 		<div class="footer-brand">
 			<div class="logo">DOUGH & BEYOND</div>
-			<p class="tagline">Äkta napolitansk surdegspizza, bakad på Staplaregatan 6 i Lidköping.</p>
+			<p class="tagline">Äkta napolitansk pizzaupplevelse på vårt vis – från Staplaregatan 6 i Lidköping.</p>
 			
 			<div class="deg-guide-box">
-				<a href="https://doughandbeyond.se/kontakta-oss/" target="_blank" rel="noopener" class="deg-guide-link">
+				<a href={`${base}/degen`} class="deg-guide-link">
 					<span>Klicka här för att se hur du använder vår deg! →</span>
 				</a>
 			</div>
@@ -35,8 +39,8 @@
 		<div class="footer-col">
 			<h4>Produkter</h4>
 			<p>• Nybakad Napolitansk Pizza</p>
-			<p>• Frysta Pizzor för Hemmabruk</p>
-			<p>• 72h Surdegsdegbollar</p>
+			<p>• Frysta pizzor – färdiga att baka av</p>
+			<p>• 72h Degbollar</p>
 			<p>• San Marzano D.O.P. Tomatsås</p>
 		</div>
 	</div>

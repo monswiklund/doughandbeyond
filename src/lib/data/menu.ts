@@ -7,7 +7,7 @@ export const menuData: MenuItem[] = [
 		name: 'Margherita',
 		category: 'pizzor',
 		description: 'Pizza i Napolitansk stil: Tomatsås, Fior di Latte, Parmigiano-Reggiano, Basilika, Olivolja EVO.',
-		price: 135,
+		price: 79,
 		ingredients: [
 			'VETEmjöl',
 			'Vatten',
@@ -29,7 +29,7 @@ export const menuData: MenuItem[] = [
 		name: 'Chicken Feta (450g)',
 		category: 'pizzor',
 		description: 'Pizza i Napolitansk stil: Tomatsås, Fior di Latte, Kycklingkebab, Fetaost, Rödlök, Sumac, Persilja.',
-		price: 155,
+		price: 79,
 		ingredients: [
 			'VETEmjöl',
 			'Vatten',
@@ -50,7 +50,7 @@ export const menuData: MenuItem[] = [
 		name: 'Prosciutto Cotto',
 		category: 'pizzor',
 		description: 'Pizza i Napolitansk stil: Tomatsås (Helt skalade tomater), Fior di Latte, Prosciutto Cotto, Ruccola, Olivolja EVO.',
-		price: 159,
+		price: 79,
 		ingredients: [
 			'VETEmjöl',
 			'Vatten',
@@ -68,7 +68,7 @@ export const menuData: MenuItem[] = [
 		name: 'Kebab Pizza',
 		category: 'pizzor',
 		description: 'Pizza i Napolitansk stil: Tomatsås, Fior di Latte, Jalapeño, Nötkebab, Mild Kebabsås.',
-		price: 165,
+		price: 79,
 		ingredients: [
 			'VETEmjöl',
 			'Vatten',
@@ -88,7 +88,7 @@ export const menuData: MenuItem[] = [
 		name: 'Diablo',
 		category: 'pizzor',
 		description: 'Pizza i Napolitansk stil: Tomatsås, Fior di Latte, Stracciatella, Salami Spianata Calabra, Het ’Nduja Calabrese Piccante, Ruccola, Olivolja EVO.',
-		price: 175,
+		price: 79,
 		ingredients: [
 			'VETEmjöl',
 			'Vatten',

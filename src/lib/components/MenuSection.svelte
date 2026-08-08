@@ -16,8 +16,8 @@
 
 	const showcaseVideos = [
 		{ src: `${base}/videos/dough_crafting.mp4`, label: '72h Långjäsning' },
-		{ src: `${base}/videos/bakery_moments.mp4`, label: '485°C Stenugnsbakad', startFromHalf: true },
-		{ src: `${base}/videos/product_showcase.mp4`, label: 'Nybakad Restaurangkvalitet' }
+		{ src: `${base}/videos/bakery_moments.mp4`, label: 'Gräddas i Pizzaluckan', startFromHalf: true },
+		{ src: `${base}/videos/product_showcase.mp4`, label: 'Bakas av hemma' }
 	];
 
 	interface AllergenOption {
@@ -99,12 +99,14 @@
 		<div class="hero-video-overlay"></div>
 
 		<div class="hero-center-overlay">
-			<span class="badge badge-ember">• HANTVERKSMENY</span>
-			<h1 class="hero-banner-title">Napolitanska Pizzor & Hantverk</h1>
-			<p class="hero-banner-sub">
-				Bakade för hand på Staplaregatan 6 i Lidköping. 72 timmars långjäsning, gräddade i 485°C stenugn och chockfrysta för hemmabruk.
-			</p>
+			<h1 class="hero-banner-title">Napolitanska Pizzor&nbsp;&&nbsp;Hantverk</h1>
 		</div>
+	</div>
+
+	<div class="container hero-copy-container">
+		<p class="hero-banner-sub">
+			På plats gräddar vi pizzorna i vår Pizzalucka på Staplaregatan 6 i Lidköping, efter 72 timmars långjäsning. I butik säljs de färdiga att baka av hemma.
+		</p>
 	</div>
 
 	<div class="container">
@@ -192,7 +194,7 @@
 						<div class="spec-pills">
 							<span class="spec-pill">72h Deg</span>
 							<span class="spec-pill">4 min Ugn</span>
-							<span class="spec-pill">485°C Bakad</span>
+							<span class="spec-pill">485°C Pizzalucka</span>
 						</div>
 
 						<!-- Open Inline Ingredient List (No Pill Boxes) -->
@@ -238,7 +240,7 @@
 		height: 520px;
 		width: 100%;
 		overflow: hidden;
-		margin-bottom: 4rem;
+		margin-bottom: 2rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -256,8 +258,8 @@
 		position: absolute;
 		inset: 0;
 		background: 
-			radial-gradient(circle at center, rgba(15, 25, 13, 0.45) 0%, rgba(15, 25, 13, 0.88) 100%),
-			linear-gradient(180deg, rgba(15, 25, 13, 0.4) 0%, rgba(15, 25, 13, 0.92) 100%);
+			radial-gradient(circle at center, rgba(15, 25, 13, 0.12) 0%, rgba(15, 25, 13, 0.32) 100%),
+			linear-gradient(180deg, rgba(15, 25, 13, 0.08) 0%, rgba(15, 25, 13, 0.48) 100%);
 		pointer-events: none;
 		z-index: 3;
 	}
@@ -289,8 +291,10 @@
 	.hero-banner-sub {
 		font-size: 1.15rem;
 		line-height: 1.6;
-		color: var(--color-dough);
-		text-shadow: 0 2px 16px rgba(0, 0, 0, 0.95);
+		color: var(--color-dough-muted);
+		text-align: center;
+		max-width: 820px;
+		margin: 0 auto 3.5rem;
 	}
 
 	.menu-controls {

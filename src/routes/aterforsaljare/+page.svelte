@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Hitta i Fryshyllan | Dough & Beyond Återförsäljare</title>
+	<title>Hitta närmsta återförsäljare | Dough & Beyond</title>
 </svelte:head>
 
 <div class="page-container">

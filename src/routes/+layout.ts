@@ -6,9 +6,10 @@ export const prerender = true;
 export const trailingSlash = 'always';
 
 
-export const load: LayoutLoad = () => {
+export const load: LayoutLoad = ({ url }) => {
 	return {
 		menuItems: menuData,
-		storeStatus
+		storeStatus,
+		pathname: url.pathname
 	};
 };

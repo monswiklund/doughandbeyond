@@ -22,15 +22,15 @@
 	const faqs = [
 		{
 			q: 'Vad innebär 72 timmars långjäsning?',
-			a: 'Vi låter degen jäsa svalt i tre hela dygn. Det bryter ner stärkelse och sockerarter vilket ger en otroligt luftig kant (cornicione), rik surdegssmak och en pizza som är lätt för magen att smälta.'
+			a: 'Vi låter degen jäsa svalt i tre hela dygn. Det bryter ner stärkelse och sockerarter vilket ger en otroligt luftig kant (cornicione), rik smak och en pizza som är lätt för magen att smälta.'
 		},
 		{
-			q: 'Hur värmer jag de frysta napolitanska pizzorna hemma?',
-			a: 'Sätt ugnen på högsta värme (helst 250°C varmluft). Placera pizzan direkt från frysen på ett varmt galler eller baksten. Värm i 4–5 minuter tills osten bubblar och kanten är krispig!'
+			q: 'Hur bakar jag av pizzorna hemma?',
+			a: 'Sätt ugnen på högsta värme (helst 250°C varmluft). Placera pizzan direkt från frysen på ett varmt galler eller en baksten och följ anvisningarna på förpackningen.'
 		},
 		{
-			q: 'Säljer ni surdegsdeg för hembak?',
-			a: 'Ja! Vi packar färska, färdigportionerade 260g surdegsbollar i 4-pack. Bara att tina, baka ut och grädda hemma.'
+			q: 'Säljer ni deg för hembak?',
+			a: 'Ja! Vi packar färska, färdigportionerade 260g degbollar i 4-pack. Bara att tina, baka ut och grädda hemma.'
 		},
 		{
 			q: 'Kan man beställa catering till företag eller fest i Lidköping?',
@@ -44,9 +44,8 @@
 		<div class="location-grid">
 			<!-- Store Info (Unboxed Open Editorial) -->
 			<div class="info-column">
-				<span class="badge badge-basil">• BESÖK BAGERIET I LIDKÖPING</span>
 				<h2>Bageri & Pizzeria på Staplaregatan 6</h2>
-				<p class="subtitle">Välkommen till vårt hantverksbageri i Lidköping där vi bakar alla pizzor från grunden.</p>
+				<p class="subtitle">Välkommen till vårt hantverksbageri i Lidköping där vi gör pizzorna från grunden och gräddar dem på plats i vår Pizzalucka.</p>
 
 				<div class="details-stack">
 					<div class="detail-block">

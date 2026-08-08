@@ -13,19 +13,11 @@
 <section class="hero-section">
 	<div class="container hero-container">
 		<div class="hero-content">
-			<div class="hero-tagline">
-				<span class="badge badge-ember">• LIDKÖPINGS BAKERI & STENUGN</span>
-				<span class="location-badge">Staplaregatan 6</span>
-			</div>
-
-			<h1 class="hero-title">
-				Hantverksbageri <br />
-				<span class="text-gold">& Frysta Pizzor</span>
-			</h1>
+			<h1 class="hero-slogan">“Vi gör mer än bara deg”</h1>
 
 			<p class="hero-description">
-				Vi bakar äkta napolitanska surdegspizzor med 72 timmars långjäsning i Lidköping. 
-				Avnjut dem färska ur bageriets stenugn eller hitta våra färdiga pizzor i fryshyllan hos din lokala matbutik.
+				Vi skapar en äkta napolitansk pizzaupplevelse på vårt vis – med 72 timmars långjäsning i Lidköping.
+				På plats gräddar vi pizzorna i vår Pizzalucka. I butik säljs de färdiga att baka av hemma.
 			</p>
 
 			<div class="hero-actions">
@@ -33,32 +25,32 @@
 					<span>Utforska Menyn & Pizzor</span>
 				</a>
 				<a href={`${base}/aterforsaljare`} class="btn btn-secondary btn-lg">
-					<span>Hitta i Fryshyllan</span>
+					<span>Hitta närmsta återförsäljare</span>
 				</a>
 			</div>
 
 			<div class="hero-stats">
 				<div class="stat-item">
 					<span class="stat-number">72h</span>
-					<span class="stat-label">Surdeg jäsning</span>
+					<span class="stat-label">Långjäsning</span>
 				</div>
 				<div class="stat-item">
 					<span class="stat-number">485°C</span>
-					<span class="stat-label">Stenugnsbakat</span>
+					<span class="stat-label">Pizzaluckan på plats</span>
 				</div>
 				<div class="stat-item">
-					<span class="stat-number">Tipo 00</span>
-					<span class="stat-label">Italienskt mjöl</span>
+					<span class="stat-number">Högkvalitativa</span>
+					<span class="stat-label">Italienska mjölsorter</span>
 				</div>
 			</div>
 		</div>
 
 		<!-- Open Frameless Hero Visual -->
 		<div class="hero-visual">
-			<div class="hero-image-wrapper">
+			<div class="hero-image-wrapper media-bleed">
 				<img
 					src={`${base}/images/pizzor/diablo_1to1.jpg`}
-					alt="Napolitansk Surdegspizza från Dough & Beyond"
+					alt="Napolitansk pizza från Dough & Beyond"
 					class="hero-image"
 				/>
 			</div>
@@ -86,33 +78,21 @@
 		gap: 1.75rem;
 	}
 
-	.hero-tagline {
-		display: flex;
-		align-items: center;
-		gap: 0.85rem;
-		flex-wrap: wrap;
-	}
-
-	.location-badge {
-		font-size: 0.78rem;
-		font-weight: 700;
-		color: var(--color-gold);
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-	}
-
-	.hero-title {
-		font-size: 3.8rem;
-		line-height: 1.05;
-		letter-spacing: -0.03em;
-		font-weight: 800;
-	}
-
 	.hero-description {
 		font-size: 1.15rem;
 		line-height: 1.7;
 		color: var(--color-dough-muted);
 		max-width: 540px;
+	}
+
+	.hero-slogan {
+		font-family: var(--font-display);
+		font-size: clamp(1.2rem, 2vw, 1.55rem);
+		font-weight: 600;
+		line-height: 1.3;
+		letter-spacing: -0.01em;
+		color: var(--color-gold);
+		max-width: 28ch;
 	}
 
 	.hero-actions {
@@ -182,8 +162,10 @@
 			gap: 3rem;
 		}
 
-		.hero-title {
-			font-size: 3rem;
+		.media-bleed {
+			width: calc(100% + (var(--page-gutter) * 2));
+			margin-left: calc(var(--page-gutter) * -1);
+			border-radius: 0;
 		}
 	}
 </style>

@@ -1,4 +1,8 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import 'leaflet/dist/leaflet.css';
+	import type { LayerGroup, Map as LeafletMap, Marker } from 'leaflet';
+
 	interface Store {
 		id: string;
 		name: string;
@@ -8,6 +12,7 @@
 		address: string;
 		products: string[];
 		inStock: boolean;
+		coordinates: [number, number];
 	}
 
 	const stores: Store[] = [
@@ -19,7 +24,8 @@
 			region: 'Västra Götaland',
 			address: 'Mellanbryggan 1, 531 30 Lidköping',
 			products: ['Margherita', 'Diablo'],
-			inStock: true
+			inStock: true,
+			coordinates: [58.505, 13.157]
 		},
 		{
 			id: '2',
@@ -29,7 +35,8 @@
 			region: 'Västra Götaland',
 			address: 'Norra Metallvägen 1, 541 39 Skövde',
 			products: ['Margherita', 'Diablo'],
-			inStock: true
+			inStock: true,
+			coordinates: [58.391, 13.845]
 		},
 		{
 			id: '3',
@@ -39,7 +46,8 @@
 			region: 'Västra Götaland',
 			address: 'Åvägen 42, 412 51 Göteborg',
 			products: ['Margherita', 'Diablo', 'Prosciutto Cotto'],
-			inStock: true
+			inStock: true,
+			coordinates: [57.696, 11.987]
 		},
 		{
 			id: '4',
@@ -49,7 +57,8 @@
 			region: 'Västra Götaland',
 			address: 'Götgatan 10, 411 05 Göteborg',
 			products: ['Margherita', 'Diablo'],
-			inStock: true
+			inStock: true,
+			coordinates: [57.707, 11.967]
 		},
 		{
 			id: '5',
@@ -59,7 +68,8 @@
 			region: 'Stockholm',
 			address: 'Lindhagensgatan 118, 112 51 Stockholm',
 			products: ['Margherita', 'Diablo', 'Chicken Feta'],
-			inStock: true
+			inStock: true,
+			coordinates: [59.332, 18.056]
 		},
 		{
 			id: '6',
@@ -69,7 +79,8 @@
 			region: 'Stockholm',
 			address: 'Sankt Eriksgatan 34, 112 36 Stockholm',
 			products: ['Margherita', 'Diablo'],
-			inStock: true
+			inStock: true,
+			coordinates: [59.331, 18.047]
 		},
 		{
 			id: '7',
@@ -79,7 +90,8 @@
 			region: 'Skåne',
 			address: 'Cypressvägen 6, 213 63 Malmö',
 			products: ['Margherita', 'Diablo'],
-			inStock: true
+			inStock: true,
+			coordinates: [55.605, 13.004]
 		},
 		{
 			id: '8',
@@ -89,12 +101,20 @@
 			region: 'Småland',
 			address: 'Bataljonsgatan 2, 553 05 Jönköping',
 			products: ['Margherita', 'Kebab Pizza'],
-			inStock: true
+			inStock: true,
+			coordinates: [57.783, 14.162]
 		}
 	];
 
 	let searchQuery = $state('');
 	let selectedRegion = $state('all');
+	let selectedStoreId = $state<string | null>(null);
+	let mapElement: HTMLDivElement;
+	let mapReady = $state(false);
+	let leafletApi: typeof import('leaflet') | null = null;
+	let mapInstance: LeafletMap | null = null;
+	let markerLayer: LayerGroup | null = null;
+	const markersById = new Map<string, Marker>();
 
 	const regions = [
 		{ id: 'all', label: 'Hela Sverige' },
@@ -114,14 +134,119 @@
 			return matchesRegion && matchesQuery;
 		});
 	});
+
+	let selectedStore = $derived(() => {
+		return filteredStores().find((store) => store.id === selectedStoreId) ?? null;
+	});
+
+	function selectStore(storeId: string) {
+		selectedStoreId = selectedStoreId === storeId ? null : storeId;
+	}
+
+	function escapeHtml(value: string) {
+		return value.replace(/[&<>"']/g, (character) => {
+			const entities: Record<string, string> = {
+				'&': '&amp;',
+				'<': '&lt;',
+				'>': '&gt;',
+				'"': '&quot;',
+				"'": '&#039;'
+			};
+			return entities[character];
+		});
+	}
+
+	function createMarkerIcon(active: boolean) {
+		return leafletApi!.divIcon({
+			className: 'retailer-map-icon',
+			html: `<span class="retailer-map-pin${active ? ' is-active' : ''}" aria-hidden="true"></span>`,
+			iconSize: [32, 40],
+			iconAnchor: [16, 40],
+			popupAnchor: [0, -38]
+		});
+	}
+
+	onMount(() => {
+		let disposed = false;
+
+		const initializeMap = async () => {
+			const importedLeaflet = await import('leaflet');
+			if (disposed) return;
+
+			leafletApi = importedLeaflet.default;
+			mapInstance = leafletApi.map(mapElement, {
+				zoomControl: true,
+				scrollWheelZoom: false,
+				minZoom: 4,
+				maxZoom: 15
+			});
+
+			leafletApi
+				.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+					attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors',
+					maxZoom: 19
+				})
+				.addTo(mapInstance);
+
+			markerLayer = leafletApi.layerGroup().addTo(mapInstance);
+			mapInstance.fitBounds(leafletApi.latLngBounds(stores.map((store) => store.coordinates)), {
+				padding: [30, 30],
+				maxZoom: 6
+			});
+			mapReady = true;
+			setTimeout(() => mapInstance?.invalidateSize(), 0);
+		};
+
+		void initializeMap();
+
+		return () => {
+			disposed = true;
+			mapInstance?.remove();
+			mapInstance = null;
+			markerLayer = null;
+			leafletApi = null;
+			markersById.clear();
+		};
+	});
+
+	$effect(() => {
+		const visibleStores = filteredStores();
+		if (!mapReady || !mapInstance || !markerLayer || !leafletApi) return;
+
+		markerLayer.clearLayers();
+		markersById.clear();
+
+		for (const store of visibleStores) {
+			const marker = leafletApi
+				.marker(store.coordinates, { icon: createMarkerIcon(false), title: store.name })
+				.bindPopup(
+					`<div class="retailer-popup"><strong>${escapeHtml(store.name)}</strong><span>${escapeHtml(store.address)}</span></div>`
+				)
+				.on('click', () => {
+					selectedStoreId = store.id;
+				});
+
+			marker.addTo(markerLayer);
+			markersById.set(store.id, marker);
+		}
+	});
+
+	$effect(() => {
+		const activeId = selectedStoreId;
+		if (!mapReady || !leafletApi) return;
+
+		for (const store of filteredStores()) {
+			markersById.get(store.id)?.setIcon(createMarkerIcon(store.id === activeId));
+		}
+	});
 </script>
 
 <section id="aterforsaljare" class="retailer-section">
 	<div class="container">
 		<div class="section-header">
 			<span class="badge badge-gold">• BUTIKER I SVERIGE</span>
-			<h2>Hitta Dough & Beyond i Fryshyllan</h2>
-			<p>Våra stenugnsbakade, snabbfrysta napolitanska pizzor finns i utvalda ICA, Coop och Hemköp-butiker över hela landet.</p>
+			<h2>Hitta närmsta återförsäljare</h2>
+			<p>Våra napolitanska pizzor, färdiga att baka av hemma, finns i utvalda ICA, Coop och Hemköp-butiker över hela landet.</p>
 		</div>
 
 		<!-- Open Editorial Controls (No Container Boxes) -->
@@ -146,6 +271,39 @@
 				/>
 			</div>
 		</div>
+
+		<section class="retailer-map" id="butikskarta" aria-labelledby="map-title">
+			<div class="map-panel-header">
+				<div>
+					<h3 id="map-title">Se var pizzorna finns</h3>
+					<p>Klicka på en plupp för att se butikens adress.</p>
+				</div>
+				<div class="map-summary" aria-label={`${filteredStores().length} av ${stores.length} butiker visas`}>
+					<strong>{filteredStores().length}</strong>
+					<span>av {stores.length} butiker</span>
+				</div>
+			</div>
+
+			<div class="map-canvas">
+				<div bind:this={mapElement} class="leaflet-map" aria-label="OpenStreetMap-karta över Dough & Beyond-återförsäljare"></div>
+				<span class="map-scale" aria-hidden="true">OSM · PROTOTYP · PLACERINGARNA ÄR UNGEFÄRLIGA</span>
+				</div>
+
+			<div class="map-detail" aria-live="polite">
+				{#if filteredStores().length === 0}
+					<p>Ingen butik matchar din sökning. Prova en annan stad eller region.</p>
+				{:else if selectedStore()}
+					<div class="map-detail-copy">
+						<span class="map-detail-meta">{selectedStore()?.chain} · {selectedStore()?.city}</span>
+						<strong>{selectedStore()?.name}</strong>
+						<span>{selectedStore()?.address}</span>
+					</div>
+					<button class="map-clear" type="button" onclick={() => (selectedStoreId = null)}>Visa alla pluppar</button>
+				{:else}
+					<p><span class="map-key-dot" aria-hidden="true"></span> Välj en plupp för butikens adress.</p>
+				{/if}
+			</div>
+		</section>
 
 		<!-- Open Frameless Store Grid (No Card Container Boxes or Background Colors) -->
 		<div class="stores-editorial-grid">
@@ -182,11 +340,11 @@
 			<div class="b2b-text">
 				<span class="badge badge-ember">• ÅTERFÖRSÄLJARE & BAGERIORDER</span>
 				<h3>Är du handlare eller återförsäljare?</h3>
-				<p>Vill du erbjuda dina kunder äkta napolitansk surdegspizza bakad i Lidköping? Kontakta oss för smakprover och leveransvillkor.</p>
+				<p>Vill du erbjuda dina kunder vår napolitanska pizzaupplevelse på vårt vis? Våra pizzor görs i Lidköping och säljs färdiga att baka av hemma i butik. Kontakta oss för smakprover och leveransvillkor.</p>
 			</div>
 			<div class="b2b-action">
 				<a href="mailto:info@doughandbeyond.se" class="btn btn-primary">
-					<span>Kontakta Bageriet (B2B)</span>
+					<span>Kontakta Bageriet</span>
 				</a>
 			</div>
 		</div>
@@ -283,6 +441,252 @@
 		color: var(--color-dough);
 		width: 100%;
 		font-size: 0.95rem;
+	}
+
+	.retailer-map {
+		margin-bottom: 5.5rem;
+		padding: 2.25rem 0 0;
+		border-top: 1px solid var(--border-subtle);
+		border-bottom: 1px solid var(--border-subtle);
+	}
+
+	.map-panel-header {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 2rem;
+	}
+
+	.map-panel-header h3 {
+		font-size: 2rem;
+		margin-bottom: 0.45rem;
+	}
+
+	.map-panel-header p {
+		font-size: 0.92rem;
+		color: var(--color-dough-muted);
+	}
+
+	.map-summary {
+		display: flex;
+		align-items: baseline;
+		gap: 0.55rem;
+		flex-shrink: 0;
+		padding-bottom: 0.2rem;
+		color: var(--color-dough-muted);
+	}
+
+	.map-summary strong {
+		font-family: var(--font-display);
+		font-size: 2.8rem;
+		line-height: 0.9;
+		color: var(--color-gold);
+	}
+
+	.map-summary span {
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.map-canvas {
+		position: relative;
+		min-height: 500px;
+		margin-top: 1.75rem;
+		overflow: hidden;
+		isolation: isolate;
+		border: 1px solid rgba(42, 64, 69, 0.5);
+		border-radius: var(--radius-lg);
+		background: #bed5da;
+	}
+
+	.leaflet-map {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		font-family: var(--font-sans);
+	}
+
+	:global(.leaflet-container) {
+		width: 100%;
+		height: 100%;
+		font-family: var(--font-sans);
+		background: #bed5da;
+	}
+
+	:global(.leaflet-control-zoom) {
+		border: 1px solid rgba(67, 87, 85, 0.3) !important;
+		border-radius: 3px !important;
+		box-shadow: 0 2px 5px rgba(33, 56, 59, 0.18) !important;
+	}
+
+	:global(.leaflet-control-zoom a) {
+		width: 2.35rem !important;
+		height: 2.35rem !important;
+		line-height: 2.2rem !important;
+		border: 0 !important;
+		background: rgba(247, 246, 239, 0.94) !important;
+		color: #3d5755 !important;
+	}
+
+	:global(.leaflet-control-zoom a:hover) {
+		background: #ffffff !important;
+		color: #1e4d48 !important;
+	}
+
+	:global(.leaflet-control-attribution) {
+		margin: 0 0.5rem 0.5rem 0;
+		padding: 0.15rem 0.35rem;
+		border-radius: 2px;
+		background: rgba(247, 246, 239, 0.84);
+		color: #4d6260;
+	}
+
+	:global(.leaflet-control-attribution a) {
+		color: #315a56;
+	}
+
+	:global(.retailer-map-icon) {
+		border: 0;
+		background: transparent;
+	}
+
+	:global(.retailer-map-pin) {
+		position: relative;
+		display: block;
+		width: 2rem;
+		height: 2rem;
+		border: 3px solid #ffffff;
+		border-radius: 50% 50% 50% 0;
+		background: var(--color-ember);
+		box-shadow: 0 3px 7px rgba(33, 56, 59, 0.36);
+		transform: rotate(-45deg);
+		transition: var(--transition);
+	}
+
+	:global(.retailer-map-pin::after) {
+		position: absolute;
+		inset: 0.45rem;
+		border-radius: 50%;
+		background: #ffffff;
+		content: '';
+	}
+
+	:global(.retailer-map-pin.is-active) {
+		background: var(--color-gold);
+		transform: rotate(-45deg) scale(1.16);
+	}
+
+	:global(.leaflet-popup-content-wrapper),
+	:global(.leaflet-popup-tip) {
+		border: 1px solid rgba(253, 215, 154, 0.24);
+		background: var(--bg-surface);
+		color: var(--color-dough);
+	}
+
+	:global(.leaflet-popup-content-wrapper) {
+		border-radius: 4px;
+		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+	}
+
+	:global(.leaflet-popup-close-button) {
+		color: var(--color-dough-muted) !important;
+	}
+
+	:global(.retailer-popup) {
+		display: grid;
+		gap: 0.2rem;
+		min-width: 180px;
+	}
+
+	:global(.retailer-popup strong) {
+		font-family: var(--font-display);
+		font-size: 0.9rem;
+	}
+
+	:global(.retailer-popup span) {
+		font-size: 0.76rem;
+		color: var(--color-dough-muted);
+	}
+
+	.map-scale {
+		position: absolute;
+		z-index: 3;
+		bottom: 1rem;
+		left: 1.2rem;
+		padding: 0.28rem 0.45rem;
+		border: 1px solid rgba(67, 87, 85, 0.24);
+		border-radius: 2px;
+		background: rgba(247, 246, 239, 0.78);
+		font-size: 0.58rem;
+		font-weight: 800;
+		letter-spacing: 0.16em;
+		color: #4d6260;
+		pointer-events: none;
+	}
+
+	.map-detail {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		min-height: 74px;
+		padding: 1rem 0 1.1rem;
+	}
+
+	.map-detail p {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		font-size: 0.9rem;
+		color: var(--color-dough-muted);
+	}
+
+	.map-key-dot {
+		width: 0.55rem;
+		height: 0.55rem;
+		flex: 0 0 auto;
+		border-radius: 50%;
+		background: var(--color-ember);
+		box-shadow: 0 0 0 4px rgba(200, 75, 49, 0.16);
+	}
+
+	.map-detail-copy {
+		display: grid;
+		gap: 0.1rem;
+	}
+
+	.map-detail-copy strong {
+		font-family: var(--font-display);
+		font-size: 1.1rem;
+		color: var(--color-dough);
+	}
+
+	.map-detail-copy > span:last-child {
+		font-size: 0.82rem;
+		color: var(--color-dough-muted);
+	}
+
+	.map-detail-meta {
+		font-size: 0.68rem;
+		font-weight: 800;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-gold);
+	}
+
+	.map-clear {
+		padding: 0;
+		border: 0;
+		background: transparent;
+		font: inherit;
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-gold);
+		cursor: pointer;
 	}
 
 	/* Open Frameless Store Grid (No Card Boxes, No Backgrounds) */
@@ -414,6 +818,16 @@
 	}
 
 	@media (max-width: 850px) {
+		.map-panel-header {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		.map-summary {
+			padding-bottom: 0;
+		}
+
 		.b2b-editorial-row {
 			flex-direction: column;
 			align-items: flex-start;
@@ -422,6 +836,24 @@
 	}
 
 	@media (max-width: 600px) {
+		.map-canvas {
+			min-height: 360px;
+		}
+
+		.map-detail {
+			align-items: flex-start;
+			flex-direction: column;
+			gap: 0.75rem;
+		}
+
+		.map-clear {
+			padding: 0.25rem 0;
+		}
+
+		.b2b-editorial-row {
+			gap: 1rem;
+		}
+
 		.stores-editorial-grid {
 			grid-template-columns: 1fr;
 		}

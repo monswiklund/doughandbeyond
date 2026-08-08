@@ -8,17 +8,17 @@
 		<div class="section-intro">
 			<div class="intro-left">
 				<span class="badge badge-ember">• HANTVERKET BAKOM PIZZAN</span>
-				<h2>Från 72h Surdeg Till Din Fryshylla</h2>
+				<h2>Från 72h långjäsning till Pizzaluckan</h2>
 			</div>
 			<div class="intro-right">
-				<p>Se hur vi bakar varje pizza för hand i vårt bageri i Lidköping – från den långsamma surdegsjäsningen till den 485-gradiga stenugnen.</p>
+				<p>Se hur vi gräddar pizzorna i vår Pizzalucka på plats i Lidköping – från den långsamma jäsningen till den 485-gradiga ugnen.</p>
 			</div>
 		</div>
 
 		<!-- Open Asymmetric Editorial Video Showcase (Dual-layer seamless video loop) -->
 		<div class="craft-editorial-grid">
 			<!-- Video Moment 01 -->
-			<div class="craft-editorial-item">
+			<div class="craft-editorial-item featured">
 				<div class="video-frame">
 					<SeamlessLoopVideo
 						src={`${base}/videos/dough_crafting.mp4`}
@@ -26,13 +26,17 @@
 					/>
 				</div>
 
-				<div class="craft-meta">
-					<span class="step-tag">01 / DEGKONSTEN</span>
-					<h3>72 Timmar Långjäsning</h3>
-					<p>Italienskt Tipo 00-mjöl och surdeg vilar i 3 dygn. Det skapar de ikoniska luftbubblorna och gör pizzan otroligt lättsmält.</p>
-					<a href="https://doughandbeyond.se/kontakta-oss/" target="_blank" rel="noopener" class="deg-guide-btn">
-						<span>Klicka här för att se hur du använder vår deg! →</span>
-					</a>
+				<div class="craft-meta featured-meta">
+					<div class="featured-meta-copy">
+						<span class="step-tag">1 / DEGKONSTEN</span>
+						<h3>72 Timmar Långjäsning</h3>
+					</div>
+					<div class="featured-meta-detail">
+						<p>Degen får jäsa i 3 dygn med högkvalitativa italienska mjölsorter. Det skapar de ikoniska luftbubblorna och gör pizzan otroligt lättsmält.</p>
+						<a href={`${base}/degen`} class="deg-guide-btn">
+							<span>Klicka här för att se hur du använder vår deg! →</span>
+						</a>
+					</div>
 				</div>
 			</div>
 
@@ -47,9 +51,9 @@
 				</div>
 
 				<div class="craft-meta">
-					<span class="step-tag">02 / STENUGNSBAKAT</span>
-					<h3>Gräddad i 485°C & Chockfryst</h3>
-					<p>Pizzorna gräddas på sekunder på glödhet häll i Lidköping innan de snabbfryses för att låsa in den nybakade restaurangkvaliteten.</p>
+					<span class="step-tag">2 / PIZZALUCKAN PÅ PLATS</span>
+					<h3>Gräddade i vår Pizzalucka</h3>
+					<p>På plats gräddar vi pizzorna i vår Pizzalucka.</p>
 				</div>
 			</div>
 		</div>
@@ -58,7 +62,7 @@
 
 <style>
 	.craft-video-section {
-		padding: 6rem 0 8rem 0;
+		padding: clamp(5rem, 8vw, 8rem) 0 clamp(7rem, 11vw, 11rem);
 	}
 
 	.section-intro {
@@ -66,7 +70,7 @@
 		grid-template-columns: 1fr 1fr;
 		gap: 4rem;
 		align-items: end;
-		margin-bottom: 4.5rem;
+		margin-bottom: clamp(3rem, 5vw, 4.5rem);
 		padding-bottom: 2rem;
 		border-bottom: 1px solid var(--border-subtle);
 	}
@@ -85,8 +89,9 @@
 	/* Open Asymmetric Editorial Grid */
 	.craft-editorial-grid {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 4rem;
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+		column-gap: clamp(2rem, 4vw, 4rem);
+		row-gap: clamp(4rem, 7vw, 7rem);
 	}
 
 	.craft-editorial-item {
@@ -95,8 +100,13 @@
 		gap: 1.5rem;
 	}
 
+	.craft-editorial-item.featured {
+		grid-column: 1 / -1;
+	}
+
 	.craft-editorial-item.staggered {
-		margin-top: 2.5rem;
+		grid-column: 1 / -1;
+		margin-top: 1rem;
 	}
 
 	.video-frame {
@@ -108,10 +118,49 @@
 		background: #000;
 	}
 
+	.featured .video-frame {
+		width: min(100vw, 1600px);
+		aspect-ratio: 2.1 / 1;
+		margin-left: 50%;
+		transform: translateX(-50%);
+		border-radius: 0;
+	}
+
+	.staggered .video-frame {
+		width: min(100vw, 1600px);
+		aspect-ratio: 2.1 / 1;
+		margin-left: 50%;
+		transform: translateX(-50%);
+		border-radius: 0;
+	}
+
 	.craft-meta {
 		display: flex;
 		flex-direction: column;
 		gap: 0.6rem;
+	}
+
+	.featured-meta {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: 1rem clamp(2rem, 7vw, 8rem);
+		align-items: start;
+	}
+
+	.featured-meta-copy,
+	.featured-meta-detail {
+		display: flex;
+		flex-direction: column;
+		gap: 0.6rem;
+	}
+
+	.featured-meta-detail {
+		padding-top: clamp(1.5rem, 2vw, 1.8rem);
+	}
+
+	.staggered .craft-meta {
+		width: calc(50% - clamp(1rem, 2vw, 2rem));
+		margin-left: auto;
 	}
 
 	.step-tag {
@@ -127,10 +176,22 @@
 		font-weight: 800;
 	}
 
+	.featured-meta h3 {
+		font-size: clamp(1.8rem, 2.5vw, 2.2rem);
+		max-width: 18ch;
+	}
+
 	.craft-meta p {
 		font-size: 0.95rem;
 		line-height: 1.65;
 		color: var(--color-dough-muted);
+	}
+
+	.featured-meta-detail p {
+		max-width: 42ch;
+		font-size: 1rem;
+		font-weight: 500;
+		line-height: 1.6;
 	}
 
 	.deg-guide-btn {
@@ -155,11 +216,50 @@
 
 		.craft-editorial-grid {
 			grid-template-columns: 1fr;
-			gap: 3.5rem;
+			gap: 4.5rem;
+		}
+
+		.craft-editorial-item.featured,
+		.craft-editorial-item.staggered {
+			grid-column: 1;
 		}
 
 		.craft-editorial-item.staggered {
 			margin-top: 0;
+		}
+
+		.featured-meta {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+
+		.featured-meta-detail {
+			padding-top: 0;
+		}
+
+		.staggered .craft-meta {
+			width: 100%;
+			margin-left: 0;
+		}
+
+		.video-frame {
+			width: calc(100% + (var(--page-gutter) * 2));
+			margin-left: calc(var(--page-gutter) * -1);
+			border-radius: 0;
+		}
+
+		.featured .video-frame {
+			width: calc(100% + (var(--page-gutter) * 2));
+			aspect-ratio: 16 / 10;
+			margin-left: calc(var(--page-gutter) * -1);
+			transform: none;
+		}
+
+		.staggered .video-frame {
+			width: calc(100% + (var(--page-gutter) * 2));
+			aspect-ratio: 16 / 10;
+			margin-left: calc(var(--page-gutter) * -1);
+			transform: none;
 		}
 	}
 </style>

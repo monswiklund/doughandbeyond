@@ -1,268 +1,171 @@
 <script lang="ts">
-	import { base } from '$app/paths';
-
-	interface FrozenPizza {
-		id: string;
-		name: string;
-		desc: string;
-		bakeTime: string;
-		bakeTemp: string;
-		price: number;
-		image: string;
-		badge: string;
-	}
-
-	const frozenPizzas: FrozenPizza[] = [
-		{
-			id: 'f-1',
-			name: 'Napolitansk Margherita',
-			desc: 'Stenugnsbakad i Lidköping, snabbfryst ur 485°C ugnen. San Marzano D.O.P., Fior di Latte & Parmigiano-Reggiano.',
-			bakeTime: '4–5 min',
-			bakeTemp: '250°C varmluft',
-			price: 169,
-			image: 'https://weiq-production-moms-product-images.s3.amazonaws.com/product_images/6e0ddf1a-7238-4bf4-9784-b6ebda31db64.',
-			badge: 'Bästsäljare'
-		},
-		{
-			id: 'f-2',
-			name: 'Napolitansk Diablo & N’duja',
-			desc: 'Stark calabrisk N’duja, spianata piccante, stracciatella och ruccola på 72-timmars surdegsbotten.',
-			bakeTime: '4–5 min',
-			bakeTemp: '250°C varmluft',
-			price: 189,
-			image: 'https://weiq-production-moms-product-images.s3.amazonaws.com/product_images/d4fb3eb3-3135-4299-a9b1-e6b8df8c0d67.',
-			badge: 'Stark & Smakrik'
-		}
-	];
+	// Open Editorial Timeline Process for pizzor färdiga att baka av
 </script>
 
 <section id="frysta-pizzor" class="frozen-section">
 	<div class="container">
 		<div class="section-header">
-			<span class="badge badge-ember">• HEMMA I DIN UGN</span>
-			<h2>Stenugnsbakat i Lidköping – Snabbfryst för Din Fryshylla</h2>
-			<p>Vi gräddar pizzorna nästan helt klara i vår 485-gradiga ugn innan de snabbfryses. När du värmer dem hemma återuppstår den krispiga, luftiga kanten som om den vore nybakad!</p>
+			<span class="badge badge-ember">• BAKA AV HEMMA</span>
+			<h2>Färdiga att baka av – från frysdisk till din ugn</h2>
+			<p>Våra pizzor säljs färdiga att baka av hemma. Förvara dem i frysen och följ anvisningarna på förpackningen för en nygräddad napolitansk pizza.</p>
 		</div>
 
-		<div class="steps-flow">
-			<div class="step-card glass-panel">
-				<span class="step-num">01</span>
-				<h4>72h Långjäsning</h4>
-				<p>Degen jäser långsamt i 3 dygn för maximal luftighet och djup smak.</p>
-			</div>
-			<div class="step-arrow">→</div>
-			<div class="step-card glass-panel">
-				<span class="step-num">02</span>
-				<h4>485°C Stenugn</h4>
-				<p>Pizzan gräddas på sekunder i ved/stenugnen i bageriet i Lidköping.</p>
-			</div>
-			<div class="step-arrow">→</div>
-			<div class="step-card glass-panel">
-				<span class="step-num">03</span>
-				<h4>Chockfrysning</h4>
-				<p>Låser in fukt och smak direkt så pizzan behåller restaurangkvalitet.</p>
-			</div>
-			<div class="step-arrow">→</div>
-			<div class="step-card glass-panel">
-				<span class="step-num">04</span>
-				<h4>4 min i Din Ugn</h4>
-				<p>In i 250°C varmluft hemma – rykande färsk napolitansk pizza!</p>
-			</div>
-		</div>
+		<!-- Open Horizontal Timeline (No Card Containers or Boxes) -->
+		<div class="timeline-container">
+			<div class="timeline-line"></div>
 
-		<div class="frozen-grid">
-			{#each frozenPizzas as item (item.id)}
-				<div class="frozen-card glass-panel">
-					<div class="image-box">
-						<img src={item.image} alt={item.name} loading="lazy" />
-						<span class="badge badge-gold frozen-badge">{item.badge}</span>
-					</div>
-
-					<div class="frozen-details">
-						<h3>{item.name}</h3>
-						<p>{item.desc}</p>
-
-						<div class="prep-info">
-							<div class="prep-item">
-								<span>Tillagningstid</span>
-								<strong>{item.bakeTime}</strong>
-							</div>
-							<div class="prep-item">
-								<span>Ugnstemperatur</span>
-								<strong>{item.bakeTemp}</strong>
-							</div>
-						</div>
-
-						<div class="frozen-footer">
-							<span class="price">{item.price} SEK</span>
-							<a href={`${base}/aterforsaljare`} class="btn btn-secondary btn-sm">
-								<span>Hitta i Butik</span>
-							</a>
-						</div>
-					</div>
+			<div class="timeline-step">
+				<div class="timeline-node">
+					<span class="node-number">01</span>
 				</div>
-			{/each}
+				<div class="timeline-content">
+					<h4>72h Långjäsning</h4>
+					<p>Degen jäser långsamt i 3 dygn för maximal luftighet och djup smak.</p>
+				</div>
+			</div>
+
+			<div class="timeline-step">
+				<div class="timeline-node">
+					<span class="node-number">02</span>
+				</div>
+				<div class="timeline-content">
+					<h4>Färdig att baka av</h4>
+					<p>Pizzan säljs färdig att baka av hemma – från frysdisk till ugn.</p>
+				</div>
+			</div>
+
+			<div class="timeline-step">
+				<div class="timeline-node">
+					<span class="node-number">03</span>
+				</div>
+				<div class="timeline-content">
+					<h4>Från frysen till ugnen</h4>
+					<p>Förvara pizzan fryst och följ gräddningsanvisningarna på förpackningen.</p>
+				</div>
+			</div>
+
+			<div class="timeline-step">
+				<div class="timeline-node">
+					<span class="node-number">04</span>
+				</div>
+				<div class="timeline-content">
+					<h4>Baka av hemma</h4>
+					<p>Följ anvisningarna på förpackningen – snart har du en nygräddad napolitansk pizza.</p>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
 
 <style>
 	.frozen-section {
-		padding: 6rem 0;
+		padding: 5rem 0 6rem 0;
 		position: relative;
 	}
 
 	.section-header {
 		text-align: center;
 		max-width: 720px;
-		margin: 0 auto 3.5rem auto;
+		margin: 0 auto 4rem auto;
 	}
 
 	.section-header h2 {
-		font-size: 2.6rem;
+		font-size: 2.8rem;
 		margin: 0.75rem 0;
 	}
 
-	.steps-flow {
-		display: grid;
-		grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
-		align-items: center;
-		gap: 1rem;
-		margin-bottom: 4rem;
+	.section-header p {
+		font-size: 1.1rem;
+		line-height: 1.65;
+		color: var(--color-dough-muted);
 	}
 
-	.step-card {
-		padding: 1.5rem;
-		border-radius: var(--radius-md);
+	/* Open Horizontal Timeline */
+	.timeline-container {
+		position: relative;
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 2.5rem;
+		margin-top: 4rem;
+	}
+
+	.timeline-line {
+		position: absolute;
+		top: 22px;
+		left: 10%;
+		right: 10%;
+		height: 2px;
+		background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-ember) 100%);
+		opacity: 0.35;
+		z-index: 1;
+	}
+
+	.timeline-step {
+		position: relative;
+		z-index: 2;
 		display: flex;
 		flex-direction: column;
-		gap: 0.5rem;
-		position: relative;
+		align-items: center;
+		text-align: center;
+		gap: 1.25rem;
 	}
 
-	.step-num {
-		font-family: var(--font-brand);
-		font-weight: 900;
-		font-size: 1.4rem;
+	.timeline-node {
+		width: 44px;
+		height: 44px;
+		border-radius: 50%;
+		background: var(--bg-dark);
+		border: 2px solid var(--color-gold);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 0 0 6px var(--bg-dark);
+	}
+
+	.node-number {
+		font-family: var(--font-display);
+		font-weight: 800;
+		font-size: 0.9rem;
 		color: var(--color-gold);
 	}
 
-	.step-card h4 {
-		font-size: 1.05rem;
-		font-weight: 700;
+	.timeline-content {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
 	}
 
-	.step-card p {
-		font-size: 0.82rem;
-		line-height: 1.5;
-	}
-
-	.step-arrow {
+	.timeline-content h4 {
 		font-size: 1.2rem;
-		color: var(--color-dough-muted);
-	}
-
-	.frozen-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-		gap: 2rem;
-	}
-
-	.frozen-card {
-		border-radius: var(--radius-md);
-		overflow: hidden;
-		display: flex;
-		flex-direction: column;
-		transition: var(--transition);
-	}
-
-	.frozen-card:hover {
-		transform: translateY(-4px);
-		border-color: var(--border-gold);
-		box-shadow: none !important;
-	}
-
-	.image-box {
-		position: relative;
-		height: 210px;
-	}
-
-	.image-box img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	.frozen-badge {
-		position: absolute;
-		top: 1rem;
-		left: 1rem;
-	}
-
-	.frozen-details {
-		padding: 1.75rem;
-		display: flex;
-		flex-direction: column;
-		flex-grow: 1;
-	}
-
-	.frozen-details h3 {
-		font-size: 1.25rem;
-		margin-bottom: 0.5rem;
-	}
-
-	.frozen-details p {
-		font-size: 0.9rem;
-		margin-bottom: 1.5rem;
-		line-height: 1.5;
-	}
-
-	.prep-info {
-		display: flex;
-		gap: 1.5rem;
-		padding: 0.85rem 1rem;
-		background: rgba(0, 0, 0, 0.2);
-		border-radius: var(--radius-sm);
-		border: 1px solid var(--border-subtle);
-		margin-bottom: 1.5rem;
-	}
-
-	.prep-item {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.prep-item span {
-		font-size: 0.72rem;
-		color: var(--color-dough-muted);
-		text-transform: uppercase;
-	}
-
-	.prep-item strong {
-		font-size: 0.88rem;
+		font-weight: 800;
 		color: var(--color-dough);
 	}
 
-	.frozen-footer {
-		margin-top: auto;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+	.timeline-content p {
+		font-size: 0.9rem;
+		line-height: 1.6;
+		color: var(--color-dough-muted);
 	}
 
-	.price {
-		font-family: var(--font-brand);
-		font-weight: 900;
-		font-size: 1.3rem;
-		color: var(--color-gold);
-	}
-
-	@media (max-width: 900px) {
-		.steps-flow {
+	@media (max-width: 850px) {
+		.timeline-container {
 			grid-template-columns: 1fr;
+			gap: 3rem;
 		}
-		.step-arrow {
-			display: none;
+
+		.timeline-line {
+			top: 0;
+			bottom: 0;
+			left: 22px;
+			right: auto;
+			width: 2px;
+			height: 100%;
+		}
+
+		.timeline-step {
+			flex-direction: row;
+			text-align: left;
+			align-items: flex-start;
 		}
 	}
 </style>
