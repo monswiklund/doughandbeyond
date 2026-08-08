@@ -8,10 +8,10 @@
 		<div class="section-intro">
 			<div class="intro-left">
 				<span class="badge badge-ember">• HANTVERKET BAKOM PIZZAN</span>
-				<h2>Från 72h långjäsning till Pizzaluckan</h2>
+				<h2>Från deg till färdig pizza</h2>
 			</div>
 			<div class="intro-right">
-				<p>Se hur vi gräddar pizzorna i vår Pizzalucka på plats i Lidköping, från den långsamma jäsningen till den 485-gradiga ugnen.</p>
+				<p>Följ vägen från den första blandningen till nygräddad pizza i Lidköping.</p>
 			</div>
 		</div>
 
@@ -29,12 +29,12 @@
 				<div class="craft-meta featured-meta">
 					<div class="featured-meta-copy">
 						<span class="step-tag">1 / DEGKONSTEN</span>
-						<h3>72 Timmar Långjäsning</h3>
+						<h3>Tre dygn för rätt struktur</h3>
 					</div>
 					<div class="featured-meta-detail">
-						<p>Degen får jäsa i 3 dygn med högkvalitativa italienska mjölsorter. Det skapar de ikoniska luftbubblorna och gör pizzan otroligt lättsmält.</p>
+						<p>Vi använder högkvalitativa italienska mjölsorter och låter degen vila svalt. Resultatet blir ikoniska luftbubblor, rik smak och en pizza som är lätt för magen att smälta.</p>
 						<a href={`${base}/degen`} class="deg-guide-btn">
-							<span>Klicka här för att se hur du använder vår deg! →</span>
+							<span>Se hur du använder degen →</span>
 						</a>
 					</div>
 				</div>
@@ -51,9 +51,6 @@
 				</div>
 
 				<div class="craft-meta">
-					<span class="step-tag">2 / PIZZALUCKAN PÅ PLATS</span>
-					<h3>Gräddade i vår Pizzalucka</h3>
-					<p>På plats gräddar vi pizzorna i vår Pizzalucka.</p>
 				</div>
 			</div>
 		</div>

@@ -9,7 +9,7 @@
 
 <svelte:head>
 	<title>Dough & Beyond | Äkta napolitansk pizzaupplevelse på vårt vis</title>
-	<meta name="description" content="Dough & Beyond i Lidköping – en napolitansk pizzaupplevelse på vårt vis, med 72 timmars långjäsning, pizzor gräddade i Pizzaluckan på plats, frysta pizzor färdiga att baka av och degbollar." />
+	<meta name="description" content="Dough & Beyond i Lidköping – napolitansk pizza på vårt vis, med deg som jäser i 72 timmar, nygräddad på plats och färdig att baka av hemma." />
 </svelte:head>
 
 <div class="app-root">

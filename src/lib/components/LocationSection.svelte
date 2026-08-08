@@ -21,8 +21,8 @@
 
 	const faqs = [
 		{
-			q: 'Vad innebär 72 timmars långjäsning?',
-			a: 'Vi låter degen jäsa svalt i tre hela dygn. Det bryter ner stärkelse och sockerarter vilket ger en otroligt luftig kant (cornicione), rik smak och en pizza som är lätt för magen att smälta.'
+			q: 'Varför jäser degen i tre dygn?',
+			a: 'När degen får jäsa svalt bryts stärkelse och sockerarter ner. Det ger en luftig kant (cornicione), rik smak och en pizza som är lätt för magen att smälta.'
 		},
 		{
 			q: 'Hur bakar jag av pizzorna hemma?',
@@ -45,7 +45,7 @@
 			<!-- Store Info (Unboxed Open Editorial) -->
 			<div class="info-column">
 				<h2>Bageri & Pizzeria på Staplaregatan 6</h2>
-				<p class="subtitle">Välkommen till vårt hantverksbageri i Lidköping där vi gör pizzorna från grunden och gräddar dem på plats i vår Pizzalucka.</p>
+				<p class="subtitle">Välkommen till vårt hantverksbageri i Lidköping där vi gör pizzorna från grunden och serverar dem nygräddade.</p>
 
 				<div class="details-stack">
 					<div class="detail-block">

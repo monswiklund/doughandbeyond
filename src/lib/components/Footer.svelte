@@ -6,11 +6,11 @@
 	<div class="container footer-content">
 		<div class="footer-brand">
 			<div class="logo">DOUGH & BEYOND</div>
-			<p class="tagline">Äkta napolitansk pizzaupplevelse på vårt vis – från Staplaregatan 6 i Lidköping.</p>
+			<p class="tagline">Äkta napolitansk pizza från Lidköping – på vårt vis.</p>
 			
 			<div class="deg-guide-box">
 				<a href={`${base}/degen`} class="deg-guide-link">
-					<span>Klicka här för att se hur du använder vår deg! →</span>
+					<span>Läs vår degguide →</span>
 				</a>
 			</div>
 

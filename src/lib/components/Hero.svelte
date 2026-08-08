@@ -48,8 +48,8 @@
 			<h1 class="hero-slogan">“Vi gör mer än bara deg”</h1>
 
 			<p class="hero-description">
-				Vi skapar en äkta napolitansk pizzaupplevelse på vårt vis – med 72 timmars långjäsning i Lidköping.
-				På plats gräddar vi pizzorna i vår Pizzalucka. I butik säljs de färdiga att baka av hemma.
+				Vi skapar en äkta napolitansk pizzaupplevelse på vårt vis – från vårt bageri i Lidköping till din ugn.
+				På plats serverar vi nygräddat. I butik hittar du pizzor färdiga att baka av hemma.
 			</p>
 
 			<div class="hero-actions">
@@ -68,7 +68,7 @@
 				</div>
 				<div class="stat-item">
 					<span class="stat-number">{displayTemp}°C</span>
-					<span class="stat-label">Pizzaluckan på plats</span>
+					<span class="stat-label">Stenugn på plats</span>
 				</div>
 				<div class="stat-item">
 					<span class="stat-number">Högkvalitativa</span>
