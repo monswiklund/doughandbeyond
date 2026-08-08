@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+:root {
+	/* Official Dough & Beyond Deep Forest Green & Champagne Gold Palette */
+	--bg-dark: #0F190D;            /* Deep Forest Green (#101B0E) */
+	--bg-surface: #152518;         /* Rich Dark Pine Surface (#152925) */
+	--bg-surface-elevated: #1D3120;/* Elevated Forest Panel */
+	--bg-glass: rgba(21, 37, 24, 0.65);
+
+	--color-dough: #F6EFE6;
+	--color-dough-muted: #C2CEC1;
+	--color-gold: #FDD79A;         /* Official Champagne Gold (#FDD79A) */
+	--color-crust: #E58E38;        /* Crust Gold */
+	--color-ember: #C84B31;        /* Stone Oven Terracotta */
+	--color-ember-hover: #E05437;
+
+	--color-basil: #4E8046;
+	--color-basil-light: #71CE7E;  /* Official Fresh Leaf Green */
+
+	--border-subtle: rgba(253, 215, 154, 0.12);
+	--border-ember: rgba(200, 75, 49, 0.35);
+	--border-gold: rgba(253, 215, 154, 0.3);
+
+	--font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+	--font-display: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+	--font-brand: 'Outfit', sans-serif;
+
+	--radius-sm: 2px;
+	--radius-md: 4px;
+	--radius-lg: 8px;
+	--radius-full: 4px;
+
+	--transition: all 0.2s ease;
+}
+
+*, *::before, *::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+	font-family: var(--font-sans);
+	background-color: var(--bg-dark);
+	color: var(--color-dough);
+	-webkit-font-smoothing: antialiased;
+}
+
+body {
+	min-height: 100vh;
+	overflow-x: hidden;
+	line-height: 1.6;
+	background: 
+		radial-gradient(circle at 50% -10%, rgba(113, 206, 126, 0.12) 0%, transparent 65%),
+		var(--bg-dark);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+::-webkit-scrollbar-track {
+	background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+	background: #1e3321;
+	border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: var(--color-basil-light);
+}
+
+/* Modern Editorial Typography */
+h1, h2, h3, h4 {
+	font-family: var(--font-display);
+	color: var(--color-dough);
+	font-weight: 800;
+	line-height: 1.05;
+	letter-spacing: -0.03em;
+}
+
+p {
+	color: var(--color-dough-muted);
+}
+
+/* Sharp Editorial Buttons - NO GLOW / NO BOX-SHADOW */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.6rem;
+	padding: 0.85rem 1.75rem;
+	font-family: var(--font-display);
+	font-weight: 700;
+	font-size: 0.85rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	border-radius: var(--radius-sm);
+	border: none;
+	cursor: pointer;
+	transition: var(--transition);
+	text-decoration: none;
+	box-shadow: none !important;
+}
+
+.btn-primary {
+	background: var(--color-ember);
+	color: #FFF;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	box-shadow: none !important;
+}
+
+.btn-primary:hover {
+	background: var(--color-ember-hover);
+	transform: translateY(-1px);
+	box-shadow: none !important;
+}
+
+.btn-secondary {
+	background: transparent;
+	color: var(--color-dough);
+	border: 1px solid var(--border-gold);
+	box-shadow: none !important;
+}
+
+.btn-secondary:hover {
+	background: rgba(253, 215, 154, 0.08);
+	border-color: var(--color-gold);
+	transform: translateY(-1px);
+	box-shadow: none !important;
+}
+
+.btn-sm {
+	padding: 0.55rem 1.1rem;
+	font-size: 0.78rem;
+}
+
+/* Clean Unboxed Editorial Badges */
+.badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+	padding: 0.2rem 0;
+	background: transparent !important;
+	border: none !important;
+	font-size: 0.75rem;
+	font-weight: 800;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	box-shadow: none !important;
+}
+
+.badge-ember {
+	color: #FF8F77;
+}
+
+.badge-gold {
+	color: var(--color-gold);
+}
+
+.badge-basil {
+	color: var(--color-basil-light);
+}
+
+.badge-amber {
+	color: var(--color-crust);
+}
+
+/* Glass Panels without box-shadow */
+.glass-panel {
+	background: rgba(21, 37, 24, 0.45);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-md);
+	box-shadow: none !important;
+}
+
+.container {
+	width: 100%;
+	max-width: 1280px;
+	margin: 0 auto;
+	padding: 0 1.5rem;
+}
