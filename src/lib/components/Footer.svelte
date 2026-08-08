@@ -40,8 +40,6 @@
 			<h4>Produkter</h4>
 			<p>• Nybakad Napolitansk Pizza</p>
 			<p>• Frysta pizzor – färdiga att baka av</p>
-			<p>• 72h Degbollar</p>
-			<p>• San Marzano D.O.P. Tomatsås</p>
 		</div>
 	</div>
 
