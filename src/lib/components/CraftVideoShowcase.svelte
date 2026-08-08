@@ -11,7 +11,7 @@
 				<h2>Från 72h långjäsning till Pizzaluckan</h2>
 			</div>
 			<div class="intro-right">
-				<p>Se hur vi gräddar pizzorna i vår Pizzalucka på plats i Lidköping – från den långsamma jäsningen till den 485-gradiga ugnen.</p>
+				<p>Se hur vi gräddar pizzorna i vår Pizzalucka på plats i Lidköping, från den långsamma jäsningen till den 485-gradiga ugnen.</p>
 			</div>
 		</div>
 

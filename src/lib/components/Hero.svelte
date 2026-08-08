@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { base } from '$app/paths';
+	import { onMount } from 'svelte';
 	import type { StoreStatus } from '$lib/types';
 
 	interface Props {
@@ -8,6 +9,37 @@
 	}
 
 	let { storeStatus = null, onExploreMenu }: Props = $props();
+
+	const TARGET_TEMP = 485;
+	const DURATION = 2200; // ms
+
+	let displayTemp = $state(0);
+
+	// Ease-out exponential: fast start, heavy deceleration near the end
+	function easeOutExpo(t: number): number {
+		return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+	}
+
+	onMount(() => {
+		let startTime: number | null = null;
+		let rafId: number;
+
+		function step(timestamp: number) {
+			if (!startTime) startTime = timestamp;
+			const elapsed = timestamp - startTime;
+			const progress = Math.min(elapsed / DURATION, 1);
+			displayTemp = Math.round(easeOutExpo(progress) * TARGET_TEMP);
+
+			if (progress < 1) {
+				rafId = requestAnimationFrame(step);
+			} else {
+				displayTemp = TARGET_TEMP;
+			}
+		}
+
+		rafId = requestAnimationFrame(step);
+		return () => cancelAnimationFrame(rafId);
+	});
 </script>
 
 <section class="hero-section">
@@ -35,7 +67,7 @@
 					<span class="stat-label">Långjäsning</span>
 				</div>
 				<div class="stat-item">
-					<span class="stat-number">485°C</span>
+					<span class="stat-number">{displayTemp}°C</span>
 					<span class="stat-label">Pizzaluckan på plats</span>
 				</div>
 				<div class="stat-item">

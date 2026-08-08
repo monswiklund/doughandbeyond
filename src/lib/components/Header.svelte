@@ -14,7 +14,7 @@
 	const navItems = [
 		{ href: `${base}/`, label: 'Hem' },
 		{ href: `${base}/pizzor`, label: 'Pizzor' },
-		{ href: `${base}/aterforsaljare`, label: 'Hitta återförsäljare' },
+		{ href: `${base}/aterforsaljare`, label: 'Hitta återförsäljare', centerOnSmall: true },
 		{ href: `${base}/degen`, label: 'Degen' }
 	];
 
@@ -48,6 +48,7 @@
 				<a
 					href={item.href}
 					class:active={isActive}
+					class:center-on-small={item.centerOnSmall}
 					aria-current={isActive ? 'page' : undefined}
 				>
 					{item.label}
@@ -132,6 +133,10 @@
 
 		.nav-links a {
 			font-size: 0.78rem;
+		}
+
+		.nav-links a.center-on-small {
+			text-align: center;
 		}
 	}
 

@@ -103,11 +103,6 @@
 		</div>
 	</div>
 
-	<div class="container hero-copy-container">
-		<p class="hero-banner-sub">
-			På plats gräddar vi pizzorna i vår Pizzalucka på Staplaregatan 6 i Lidköping, efter 72 timmars långjäsning. I butik säljs de färdiga att baka av hemma.
-		</p>
-	</div>
 
 	<div class="container">
 		<!-- Open Filter & Search Controls -->

@@ -84,9 +84,7 @@
 
 <style>
 	.dough-guide {
-		background:
-			radial-gradient(circle at 76% 8%, rgba(200, 75, 49, 0.12), transparent 25rem),
-			var(--bg-dark);
+		background: transparent;
 	}
 
 	.guide-hero {
@@ -133,8 +131,6 @@
 	.hero-copy h1 {
 		max-width: 12ch;
 		font-size: clamp(2.9rem, 4.2vw, 4.75rem);
-		line-height: 0.94;
-		letter-spacing: -0.045em;
 	}
 
 	.hero-lead {
@@ -146,22 +142,10 @@
 
 	.hero-media {
 		position: relative;
-		isolation: isolate;
-		min-height: 34rem;
+		aspect-ratio: 1 / 1;
 		overflow: hidden;
-		background: #111a10;
-		border-radius: 48% 48% 2px 2px;
-		box-shadow: 0 28px 65px rgba(0, 0, 0, 0.3);
-	}
-
-	.hero-media::after {
-		position: absolute;
-		inset: 1rem;
-		z-index: 2;
-		border: 1px solid rgba(249, 244, 235, 0.26);
-		border-radius: 42% 42% 0 0;
-		content: '';
-		pointer-events: none;
+		background: var(--bg-surface);
+		border-radius: var(--radius-sm);
 	}
 
 	.hero-media :global(.seamless-video-container) {
@@ -169,30 +153,19 @@
 		inset: 0;
 	}
 
-	.hero-media :global(.video-layer) {
-		filter: saturate(0.9) contrast(1.04);
-	}
-
 	.guide-body {
 		padding: 0 0 clamp(5rem, 10vw, 9rem);
-	}
-
-	.guide-content {
-		max-width: 960px;
 	}
 
 	.guide-section {
 		scroll-margin-top: 6rem;
 		padding: clamp(4rem, 8vw, 7rem) 0;
-		border-top: 1px solid rgba(253, 215, 154, 0.18);
+		border-top: 1px solid var(--border-subtle);
 	}
 
 	.guide-section h2 {
 		max-width: 20ch;
-		color: var(--color-dough);
-		font-size: clamp(2rem, 3.5vw, 3.4rem);
-		line-height: 0.98;
-		letter-spacing: -0.04em;
+		font-size: clamp(2rem, 3vw, 3.25rem);
 	}
 
 	.copy-flow {
@@ -200,16 +173,8 @@
 		margin-top: clamp(2.5rem, 5vw, 4.5rem);
 	}
 
-	.copy-flow p,
-	.tip-line,
-	.outro-copy p {
-		color: var(--color-dough-muted);
-		font-size: 1rem;
-		line-height: 1.8;
-	}
-
 	.copy-flow p + p {
-		margin-top: 1.25rem;
+		margin-top: 1.1rem;
 	}
 
 	.copy-flow strong,
@@ -223,7 +188,7 @@
 		max-width: 58ch;
 		margin-top: 3.5rem;
 		padding-top: 1.25rem;
-		border-top: 1px solid var(--color-ember);
+		border-top: 1px solid var(--border-ember);
 	}
 
 	.guide-outro {
@@ -231,14 +196,9 @@
 		background: var(--bg-surface);
 	}
 
-	.outro-inner {
-		max-width: 960px;
-	}
-
 	.outro-inner h2 {
 		max-width: 17ch;
-		font-size: clamp(2.1rem, 3.5vw, 3.6rem);
-		line-height: 0.98;
+		font-size: clamp(2rem, 3vw, 3.25rem);
 	}
 
 	.outro-copy {
@@ -265,8 +225,8 @@
 	.signature {
 		margin-top: 2rem;
 		font-family: var(--font-heading);
-		font-size: 1.15rem !important;
-		line-height: 1.5 !important;
+		font-size: 1.15rem;
+		line-height: 1.5;
 	}
 
 	.signature strong {
@@ -308,7 +268,7 @@
 		}
 
 		.hero-media {
-			min-height: 30rem;
+			aspect-ratio: 16 / 10;
 		}
 
 		.guide-section {
@@ -316,7 +276,7 @@
 		}
 
 		.guide-section h2 {
-			font-size: clamp(2rem, 8.5vw, 3.1rem);
+			font-size: clamp(1.9rem, 7.5vw, 2.8rem);
 		}
 
 		.copy-flow {
@@ -326,7 +286,7 @@
 
 	@media (max-width: 420px) {
 		.hero-media {
-			min-height: 25rem;
+			aspect-ratio: 4 / 3;
 		}
 	}
 </style>
