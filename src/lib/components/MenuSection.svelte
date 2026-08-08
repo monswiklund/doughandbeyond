@@ -2,10 +2,15 @@
 	import { base } from '$app/paths';
 	import type { MenuItem } from '$lib/types';
 	import MultiVideoCrossfadePlayer from '$lib/components/MultiVideoCrossfadePlayer.svelte';
+	import {
+		allergenOptions,
+		ingredientMatchesAllergen,
+		itemHasAnySelectedAllergen
+	} from '$lib/data/allergens';
 
 	interface Props {
 		items: MenuItem[];
-		onSelectPizza: (item: MenuItem) => void;
+		onSelectPizza: (item: MenuItem, selectedAllergens: string[]) => void;
 	}
 
 	let { items, onSelectPizza }: Props = $props();
@@ -20,56 +25,12 @@
 		{ src: `${base}/videos/product_showcase.mp4`, label: 'Bakas av hemma' }
 	];
 
-	interface AllergenOption {
-		id: string;
-		label: string;
-		keywords: string[];
-	}
-
-	const allergenOptions: AllergenOption[] = [
-		{ id: 'gluten', label: 'Gluten / Vete', keywords: ['vete', 'gluten'] },
-		{ id: 'mjolk', label: 'Mjölk / Laktos', keywords: ['mjölk', 'ost', 'feta', 'yoghurt', 'fior di latte', 'parmigiano', 'stracciatella'] },
-		{ id: 'flask', label: 'Fläskkött', keywords: ['prosciutto', 'salami', 'spianata', 'nduja', 'gris', 'fläsk'] },
-		{ id: 'agg', label: 'Ägg', keywords: ['ägg', 'äggula'] },
-		{ id: 'senap', label: 'Senap', keywords: ['senap'] }
-	];
-
 	function toggleAllergen(id: string) {
 		if (selectedAllergens.includes(id)) {
 			selectedAllergens = selectedAllergens.filter((a) => a !== id);
 		} else {
 			selectedAllergens = [...selectedAllergens, id];
 		}
-	}
-
-	function itemHasAllergen(item: MenuItem, allergenId: string): boolean {
-		const option = allergenOptions.find((a) => a.id === allergenId);
-		if (!option) return false;
-
-		const fullText = (
-			item.name +
-			' ' +
-			item.description +
-			' ' +
-			item.ingredients.join(' ') +
-			' ' +
-			(item.allergens?.join(' ') || '')
-		).toLowerCase();
-
-		return option.keywords.some((kw) => fullText.includes(kw.toLowerCase()));
-	}
-
-	function itemHasAnySelectedAllergen(item: MenuItem): boolean {
-		return selectedAllergens.some((aId) => itemHasAllergen(item, aId));
-	}
-
-	function ingredientMatchesAllergen(ing: string): boolean {
-		if (selectedAllergens.length === 0) return false;
-		const ingLower = ing.toLowerCase();
-		return selectedAllergens.some((aId) => {
-			const option = allergenOptions.find((opt) => opt.id === aId);
-			return option ? option.keywords.some((kw) => ingLower.includes(kw.toLowerCase())) : false;
-		});
 	}
 
 	let filteredItems = $derived(() => {
@@ -80,7 +41,7 @@
 				item.ingredients.some((ing) => ing.toLowerCase().includes(searchQuery.toLowerCase()));
 
 			const passesAllergenFilter =
-				filterMode === 'highlight' || !itemHasAnySelectedAllergen(item);
+				filterMode === 'highlight' || !itemHasAnySelectedAllergen(item, selectedAllergens);
 
 			return matchesSearch && passesAllergenFilter;
 		});
@@ -157,13 +118,14 @@
 		<!-- Open Frameless 3xN Editorial Grid -->
 		<div class="editorial-grid">
 			{#each filteredItems() as item, idx (item.id)}
-				{@const hasAllergenWarning = selectedAllergens.length > 0 && itemHasAnySelectedAllergen(item)}
+				{@const hasAllergenWarning =
+					selectedAllergens.length > 0 && itemHasAnySelectedAllergen(item, selectedAllergens)}
 				<div 
 					class="menu-card {hasAllergenWarning && filterMode === 'highlight' ? 'allergen-warning-card' : ''}"
-					onclick={() => onSelectPizza(item)}
+					onclick={() => onSelectPizza(item, [...selectedAllergens])}
 					role="button"
 					tabindex="0"
-					onkeydown={(e) => e.key === 'Enter' && onSelectPizza(item)}
+					onkeydown={(e) => e.key === 'Enter' && onSelectPizza(item, [...selectedAllergens])}
 				>
 					<!-- Frameless 1:1 Aspect Ratio Image Box -->
 					<div class="card-image-wrapper">
@@ -195,7 +157,7 @@
 						<!-- Open Inline Ingredient List (No Pill Boxes) -->
 						<div class="ingredients-inline">
 							{#each item.ingredients as ing, i}
-								{@const isMatched = ingredientMatchesAllergen(ing)}
+								{@const isMatched = ingredientMatchesAllergen(ing, selectedAllergens)}
 								<span class="ing-text {isMatched ? 'allergen-matched' : ''}">
 									{ing}{#if i < item.ingredients.length - 1}<span class="dot-sep">•</span>{/if}
 								</span>

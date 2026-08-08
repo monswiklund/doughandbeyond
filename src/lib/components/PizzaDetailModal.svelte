@@ -1,13 +1,18 @@
 <script lang="ts">
 	import { tick } from 'svelte';
 	import type { MenuItem } from '$lib/types';
+	import {
+		ingredientMatchesAllergen,
+		itemHasAnySelectedAllergen
+	} from '$lib/data/allergens';
 
 	interface Props {
 		item: MenuItem | null;
+		selectedAllergens: string[];
 		onClose: () => void;
 	}
 
-	let { item, onClose }: Props = $props();
+	let { item, selectedAllergens, onClose }: Props = $props();
 	let isImageLightboxOpen = $state(false);
 	let imageTrigger = $state<HTMLButtonElement | undefined>(undefined);
 	let lightboxCloseButton = $state<HTMLButtonElement | undefined>(undefined);
@@ -106,6 +111,13 @@
 					<h2 class="modal-title">{item.name}</h2>
 					<p class="modal-desc">{item.description}</p>
 
+					{#if selectedAllergens.length > 0 && itemHasAnySelectedAllergen(item, selectedAllergens)}
+						<div class="selected-allergen-warning" role="status">
+							<span aria-hidden="true">!</span>
+							<strong>Innehåller vald allergen</strong>
+						</div>
+					{/if}
+
 					<div class="craft-specs">
 						<div class="spec-item">
 							<span class="spec-lbl">Deg</span>
@@ -125,7 +137,9 @@
 						<h4>Ingredienser & Råvaror</h4>
 						<div class="ingredients-chips">
 							{#each item.ingredients as ing}
-								<span class="ing-chip">{ing}</span>
+								<span class="ing-chip {ingredientMatchesAllergen(ing, selectedAllergens) ? 'allergen-matched-chip' : ''}">
+									{ing}
+								</span>
 							{/each}
 						</div>
 					</div>
@@ -386,6 +400,40 @@
 		background: rgba(246, 239, 230, 0.06);
 		border-radius: var(--radius-sm);
 		color: var(--color-dough-muted);
+	}
+
+	.ing-chip.allergen-matched-chip {
+		background: rgba(200, 75, 49, 0.2);
+		border: 1px solid var(--border-ember);
+		color: #ff8f77;
+		font-weight: 700;
+	}
+
+	.selected-allergen-warning {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		width: fit-content;
+		padding: 0.55rem 0.75rem;
+		border: 1px solid var(--border-ember);
+		border-radius: var(--radius-sm);
+		background: rgba(200, 75, 49, 0.16);
+		color: #ff8f77;
+		font-size: 0.78rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
+	.selected-allergen-warning span {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.1rem;
+		height: 1.1rem;
+		border-radius: 50%;
+		background: var(--color-ember);
+		color: #fff;
+		font-size: 0.72rem;
 	}
 
 	.allergens {

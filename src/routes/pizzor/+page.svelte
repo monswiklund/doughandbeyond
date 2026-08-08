@@ -8,9 +8,11 @@
 	let { data }: { data: PageData } = $props();
 
 	let selectedPizza = $state<MenuItem | null>(null);
+	let selectedPizzaAllergens = $state<string[]>([]);
 
-	function handleSelectPizza(item: MenuItem) {
+	function handleSelectPizza(item: MenuItem, selectedAllergens: string[]) {
 		selectedPizza = item;
+		selectedPizzaAllergens = [...selectedAllergens];
 	}
 
 	function handleCloseModal() {
@@ -32,6 +34,7 @@
 
 	<PizzaDetailModal
 		item={selectedPizza}
+		selectedAllergens={selectedPizzaAllergens}
 		onClose={handleCloseModal}
 	/>
 </div>
