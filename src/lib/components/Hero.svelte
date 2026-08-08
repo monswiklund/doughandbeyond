@@ -108,6 +108,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1.75rem;
+		min-width: 0;
 	}
 
 	.hero-description {
@@ -146,6 +147,7 @@
 	.stat-item {
 		display: flex;
 		flex-direction: column;
+		min-width: 0;
 	}
 
 	.stat-number {
@@ -161,10 +163,12 @@
 		color: var(--color-dough-muted);
 		text-transform: uppercase;
 		letter-spacing: 0.04em;
+		overflow-wrap: anywhere;
 	}
 
 	.hero-visual {
 		position: relative;
+		min-width: 0;
 	}
 
 	.hero-image-wrapper {
@@ -190,8 +194,17 @@
 
 	@media (max-width: 1024px) {
 		.hero-container {
-			grid-template-columns: 1fr;
+			grid-template-columns: minmax(0, 1fr);
 			gap: 3rem;
+		}
+
+		.hero-stats {
+			flex-wrap: wrap;
+			gap: 1.25rem 1.5rem;
+		}
+
+		.stat-item {
+			flex: 1 1 10rem;
 		}
 
 		.media-bleed {
